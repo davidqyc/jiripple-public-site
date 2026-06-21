@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReliableReader Privacy Policy</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.58;
+      color: #202124;
+      background: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 32px 0 10px;
+      font-size: 1.25rem;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 12px 0;
+    }
+
+    ul {
+      margin: 12px 0;
+      padding-left: 1.35rem;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .effective-date {
+      color: #5f6368;
+      font-weight: 600;
+    }
+
+    a {
+      color: #0b57d0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color: #e8eaed;
+        background: #111315;
+      }
+
+      body {
+        background: #111315;
+      }
+
+      .effective-date {
+        color: #bdc1c6;
+      }
+
+      a {
+        color: #8ab4f8;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ReliableReader Privacy Policy</h1>
+    <p class="effective-date">Effective Date: Pending publication</p>
+
+    <p>ReliableReader is an iOS app for importing long-form text and generating speech audio for listening. This policy describes the data handling behavior of the current beta version.</p>
+
+    <p>For privacy questions, contact: <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a><br>
+    For support questions, contact: <a href="mailto:reliablereader-support@jiripple.com">reliablereader-support@jiripple.com</a></p>
+
+    <h2>Information You Provide</h2>
+
+    <p>ReliableReader may process text that you import, paste, type, or share into the app. This can include article titles, article body text, URLs shared from other apps, and text passed through Shortcuts.</p>
+
+    <p>When you use speech generation, the article text you ask the app to read is sent to the Azure Speech endpoint that you configure in the app. This is required for the text-to-speech feature.</p>
+
+    <p>ReliableReader does not include a shared server-side Azure key in the current beta. You provide your own Azure Speech key, region, and endpoint in the app settings.</p>
+
+    <h2>Azure Speech Configuration</h2>
+
+    <p>The current beta stores your Azure Speech configuration locally on your device:</p>
+
+    <ul>
+      <li>Azure Speech key: stored in Keychain.</li>
+      <li>Azure region, endpoint, and credential metadata: stored in local app settings.</li>
+      <li>Audio quality and text-processing settings: stored in local app settings.</li>
+    </ul>
+
+    <p>Azure Speech requests are sent directly from the app to the endpoint you configure. Azure's own terms and privacy practices may apply to the Azure Speech service you use.</p>
+
+    <h2>Local Storage</h2>
+
+    <p>The current beta may store the following information locally on your device:</p>
+
+    <ul>
+      <li>Azure Speech configuration and related settings.</li>
+      <li>The current article draft or imported text, so the app can restore it after restart.</li>
+      <li>Generated speech audio cache, so the same content can be played again without regenerating every segment.</li>
+      <li>Playback speed, audio quality, text-cleaning options, diagnostics settings, and similar app preferences.</li>
+      <li>Diagnostic information when advanced diagnostics are enabled or copied by you.</li>
+    </ul>
+
+    <p>The app includes local controls for clearing saved drafts, clearing the local audio cache, and deleting the saved Azure key. Clearing local drafts or cached audio does not delete data that may already have been sent to Azure Speech for generation.</p>
+
+    <h2>Diagnostics and Feedback</h2>
+
+    <p>ReliableReader includes optional diagnostics to help troubleshoot import, generation, playback, text cleaning, and feedback issues.</p>
+
+    <p>Copied diagnostics are intended to be redacted where possible, including key-like strings, tokens, authorization values, cookies, URLs, SSML, local file paths, request or response body fields, and long text snippets. This redaction is a safety measure and is not guaranteed to remove every sensitive value.</p>
+
+    <p>The separate cleaned reading text view may include article content. Do not share cleaned reading text unless you choose to provide that content.</p>
+
+    <p>If you send feedback through TestFlight, email, screenshots, screen recordings, or copied diagnostics, the information you include will be handled through that feedback channel. Do not paste Azure keys, secrets, request headers, request bodies, private article text, or other sensitive content into feedback unless you choose to share it.</p>
+
+    <h2>App Capabilities and Permissions</h2>
+
+    <p>ReliableReader uses network access to reach the Azure Speech endpoint you configure. It also uses background audio playback so generated audio can continue playing according to iOS audio behavior.</p>
+
+    <p>The app can receive content through the iOS share sheet, Shortcuts, URL handoff, and clipboard import. Clipboard import happens after you tap the import action in the app. Shared URLs are imported as URL text in the current beta.</p>
+
+    <p>Based on the current app configuration, ReliableReader does not request access to the microphone, location, contacts, or photo library.</p>
+
+    <h2>Services Not Included in the Current Beta</h2>
+
+    <p>The current beta does not include:</p>
+
+    <ul>
+      <li>An account system.</li>
+      <li>A developer-operated backend for feedback submission.</li>
+      <li>Cloud sync.</li>
+      <li>Advertising.</li>
+      <li>Third-party analytics or tracking SDKs.</li>
+    </ul>
+
+    <h2>Your Choices</h2>
+
+    <p>For beta testing, use non-sensitive text when possible. You control whether to configure Azure Speech, what text to import, when to generate speech audio, and what feedback or diagnostics to share.</p>
+
+    <p>You can remove local data using the controls in the app settings. You can also contact <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a> for privacy-related requests or questions.</p>
+
+    <h2>Changes to This Policy</h2>
+
+    <p>This policy may be updated as ReliableReader changes. The public version should be reviewed before each release or TestFlight expansion.</p>
+  </main>
+</body>
+</html>
