@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReliableReader 隐私政策</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.72;
+      color: #202124;
+      background: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 56px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin: 32px 0 10px;
+      font-size: 1.25rem;
+      line-height: 1.3;
+    }
+
+    p {
+      margin: 12px 0;
+    }
+
+    ul {
+      margin: 12px 0;
+      padding-left: 1.35rem;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    .effective-date {
+      color: #5f6368;
+      font-weight: 600;
+    }
+
+    .language-switch {
+      margin: 8px 0 20px;
+      color: #5f6368;
+      font-size: 0.95rem;
+    }
+
+    a {
+      color: #0b57d0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color: #e8eaed;
+        background: #111315;
+      }
+
+      body {
+        background: #111315;
+      }
+
+      .effective-date,
+      .language-switch {
+        color: #bdc1c6;
+      }
+
+      a {
+        color: #8ab4f8;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>ReliableReader 隐私政策</h1>
+    <p class="effective-date">生效日期：待发布</p>
+    <nav class="language-switch" aria-label="语言选项">
+      <a href="/reliablereader/privacy/">English</a>
+      <span> / </span>
+      <a aria-current="page" href="/reliablereader/privacy/zh-CN/">简体中文</a>
+    </nav>
+
+    <p>ReliableReader 是一款 iOS 应用，用于导入长文本并生成语音音频，方便用户收听。本文说明当前测试版的数据处理方式，包括可选的应用内反馈系统。</p>
+
+    <p>隐私相关问题请联系：<a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a><br>
+    支持相关问题请联系：<a href="mailto:reliablereader-support@jiripple.com">reliablereader-support@jiripple.com</a></p>
+
+    <h2>你提供的信息</h2>
+
+    <p>ReliableReader 可能会处理你导入、粘贴、输入或通过分享传入应用的文本。这可能包括文章标题、文章正文、从其他应用分享来的 URL，以及通过快捷指令传入的文本。</p>
+
+    <p>当你使用语音生成功能时，你要求应用朗读的文章文本会发送到你在应用中配置的 Azure Speech 端点。这是文本转语音功能正常工作所必需的。</p>
+
+    <p>当前测试版不包含由开发者统一提供的服务端 Azure 密钥。你需要在应用设置中提供自己的 Azure Speech 密钥、区域和端点。</p>
+
+    <p>如果你主动在应用内提交反馈，你填写的反馈内容会发送到 ReliableReader 反馈后端，并作为支持/反馈内容保存。开发者可能会查看该反馈内容，并可能通过反馈系统回复。当前版本不收集可选的邮箱、手机号或姓名字段。</p>
+
+    <h2>Azure Speech 配置</h2>
+
+    <p>当前测试版会在你的设备本地保存 Azure Speech 配置：</p>
+
+    <ul>
+      <li>Azure Speech 密钥：保存在 Keychain 中。</li>
+      <li>Azure 区域、端点和凭据元数据：保存在本地应用设置中。</li>
+      <li>音频质量和文本处理设置：保存在本地应用设置中。</li>
+    </ul>
+
+    <p>Azure Speech 请求会从应用直接发送到你配置的端点。你使用的 Azure Speech 服务适用 Azure 自身的条款和隐私做法。</p>
+
+    <h2>本地存储</h2>
+
+    <p>当前测试版可能会在你的设备本地保存以下信息：</p>
+
+    <ul>
+      <li>Azure Speech 配置及相关设置。</li>
+      <li>当前文章草稿或导入文本，用于应用重启后恢复。</li>
+      <li>已生成的语音音频缓存，用于同一内容再次播放时避免重复生成。</li>
+      <li>播放速度、音频质量、文本清理选项、诊断设置等应用偏好。</li>
+      <li>当你启用或复制高级诊断信息时产生的诊断信息。</li>
+      <li>当你提交应用内反馈时，用于查询回复状态的反馈会话 token，保存在 Keychain 中。</li>
+    </ul>
+
+    <p>应用内提供了清除已保存草稿、清除本地音频缓存、删除已保存 Azure 密钥的控制项。清除本地草稿或缓存音频，不会删除可能已经发送给 Azure Speech 用于生成语音的数据，也不会删除已经提交到 ReliableReader 反馈后端的反馈内容。</p>
+
+    <h2>诊断与反馈</h2>
+
+    <p>ReliableReader 包含可选诊断信息，用于排查导入、生成、播放、文本清理和反馈相关问题。</p>
+
+    <p>复制诊断信息时，应用会尽量对敏感内容做脱敏处理，包括类似密钥的字符串、token、授权信息、cookie、URL、SSML、本地文件路径、请求或响应正文相关字段，以及较长文本片段。该脱敏是一项安全措施，但不保证能移除所有敏感值。</p>
+
+    <p>单独的清理后阅读文本视图可能包含文章内容。除非你选择主动提供该内容，否则不要分享清理后阅读文本。</p>
+
+    <p>应用内反馈只会在你选择发送时提交。一次反馈提交可能包括：</p>
+
+    <ul>
+      <li>你选择的反馈分类和填写的反馈内容。</li>
+      <li>应用版本、构建号、iOS 版本、设备型号、语言区域和时区。</li>
+      <li>如果你选择包含诊断摘要，可能包括功能区域、播放状态、安全的应用错误代码、重试次数、粗略网络状态、导入/TTS/缓存状态和错误数量等安全摘要字段。</li>
+    </ul>
+
+    <p>应用内反馈系统不会上传文章正文、清理后阅读文本、Azure 密钥、Bark token、授权请求头、cookie、原始请求或响应正文、SSML、完整 URL、完整网页内容、剪贴板内容或本地文件路径。服务端校验设计上会在这些字段被意外包含时拒绝它们。</p>
+
+    <p>当反馈被提交后，后端会保存反馈会话元数据、用户反馈内容、开发者回复、状态事件，以及可选的安全诊断摘要。当前后端模型中，反馈记录保留 7 天，之后应按照后端保留策略过期或删除。</p>
+
+    <p>反馈系统使用 <code>sessionId</code> 和高熵 <code>sessionToken</code>，让应用在没有账号的情况下查询开发者回复。应用会将 <code>sessionToken</code> 保存在 Keychain 中。后端只保存 session token 的哈希值。session token 不会显示在应用界面中，也不会包含在开发者通知中。</p>
+
+    <p>当你刷新反馈状态时，开发者回复可能会显示在应用中。ReliableReader 不承诺实时支持，也不承诺每一条反馈都会收到回复。</p>
+
+    <p>ReliableReader 可能会使用 Bark 作为服务端开发者通知服务，用于提示有新反馈。应用本身不包含 Bark token。Bark 通知仅限低敏感度的路由和分流信息，例如 session id 前缀、分类、状态、时间戳、应用版本、构建号或仅开发者可访问的链接。Bark 通知不包含你的反馈正文、文章文本、清理后阅读文本、session token、Azure 密钥或原始诊断信息。</p>
+
+    <p>如果你通过 TestFlight、邮件、截图、录屏、复制诊断信息或其他手动渠道发送反馈，你主动包含的信息会通过对应反馈渠道处理。除非你选择主动分享，否则不要在反馈中粘贴 Azure 密钥、secret、请求头、请求正文、私人文章文本、清理后阅读文本或其他敏感内容。</p>
+
+    <h2>应用能力与权限</h2>
+
+    <p>ReliableReader 使用网络访问你配置的 Azure Speech 端点。应用也使用后台音频播放，使已生成音频能够按照 iOS 音频行为继续播放。</p>
+
+    <p>应用可以通过 iOS 分享面板、快捷指令、URL handoff 和剪贴板导入接收内容。剪贴板导入会在你点击应用内导入操作后发生。当前测试版中，共享 URL 会作为 URL 文本导入。</p>
+
+    <p>根据当前应用配置，ReliableReader 不请求访问麦克风、定位、通讯录或照片库。</p>
+
+    <h2>当前测试版不包含的服务</h2>
+
+    <p>当前测试版不包含：</p>
+
+    <ul>
+      <li>账号系统。</li>
+      <li>云同步。</li>
+      <li>广告。</li>
+      <li>第三方分析或跟踪 SDK。</li>
+    </ul>
+
+    <p>当前测试版仅在你主动提交反馈时使用开发者运营的反馈后端。该后端不用于账号登录、云同步、广告、分析、跟踪、托管 TTS 或存储 Azure 密钥。</p>
+
+    <h2>你的选择</h2>
+
+    <p>测试期间，建议尽量使用非敏感文本。你可以自行控制是否配置 Azure Speech、导入哪些文本、何时生成语音音频，以及分享哪些反馈或诊断信息。</p>
+
+    <p>你可以使用应用设置中的控制项移除本地数据。本地删除控制项不会删除已经提交到反馈后端的反馈内容。你也可以通过 <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a> 联系我们，提出隐私相关问题或请求。</p>
+
+    <h2>政策更新</h2>
+
+    <p>随着 ReliableReader 的变化，本政策可能会更新。每次发布或扩大 TestFlight 测试前，都应复核公开版本。</p>
+  </main>
+</body>
+</html>
