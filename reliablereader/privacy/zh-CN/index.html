@@ -101,7 +101,8 @@
 <body>
   <main>
     <h1>ReliableReader 隐私政策</h1>
-    <p class="effective-date">生效日期：待发布</p>
+    <p class="effective-date">生效日期：2026 年 6 月 27 日<br>
+    适用版本：ReliableReader iOS 0.1 beta</p>
     <nav class="language-switch" aria-label="语言选项">
       <a href="/reliablereader/privacy/">English</a>
       <span> / </span>
@@ -110,6 +111,8 @@
 
     <p>ReliableReader 是一款 iOS 应用，用于导入长文本并生成语音音频，方便用户收听。本文说明当前测试版的数据处理方式，包括可选的应用内反馈系统。</p>
 
+    <p>ReliableReader 由坐等唯美艺术生活（沈阳）有限公司运营。</p>
+
     <p>隐私相关问题请联系：<a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a><br>
     支持相关问题请联系：<a href="mailto:reliablereader-support@jiripple.com">reliablereader-support@jiripple.com</a></p>
 
@@ -117,7 +120,7 @@
 
     <p>ReliableReader 可能会处理你导入、粘贴、输入或通过分享传入应用的文本。这可能包括文章标题、文章正文、从其他应用分享来的 URL，以及通过快捷指令传入的文本。</p>
 
-    <p>当你使用语音生成功能时，你要求应用朗读的文章文本会发送到你在应用中配置的 Azure Speech 端点。这是文本转语音功能正常工作所必需的。</p>
+    <p>当你点击生成语音时，ReliableReader 会将你要求朗读的文本直接发送到你在应用中配置的 Microsoft Azure Speech 端点。Microsoft Azure Speech 是第三方服务，不由 ReliableReader 运营。你负责选择 Azure 区域、端点、账户、密钥、配额、费用和 Azure 侧的数据设置。ReliableReader 不会通过自己的服务器代理这些 Azure Speech 请求，也不会在开发者服务器上接收或保存你的 Azure Speech 密钥、文章文本或 Azure 返回的音频。Azure Speech 的处理适用 Microsoft Azure 相关条款、隐私和数据处理做法。除非你希望当前文本发送到你配置的 Azure Speech 端点，否则不要点击生成语音。</p>
 
     <p>当前测试版不包含由开发者统一提供的服务端 Azure 密钥。你需要在应用设置中提供自己的 Azure Speech 密钥、区域和端点。</p>
 
@@ -133,7 +136,7 @@
       <li>音频质量和文本处理设置：保存在本地应用设置中。</li>
     </ul>
 
-    <p>Azure Speech 请求会从应用直接发送到你配置的端点。你使用的 Azure Speech 服务适用 Azure 自身的条款和隐私做法。</p>
+    <p>Azure Speech 请求会从应用直接发送到你配置的端点。ReliableReader 不会通过开发者运营的服务器接收、代理或保存你的 Azure Speech 密钥、文章文本或 Azure 生成的音频。</p>
 
     <h2>本地存储</h2>
 
@@ -147,6 +150,8 @@
       <li>当你启用或复制高级诊断信息时产生的诊断信息。</li>
       <li>当你提交应用内反馈时，用于查询回复状态的反馈会话 token，保存在 Keychain 中。</li>
     </ul>
+
+    <p>本地草稿、设置和音频缓存保存在应用沙盒中。根据 iOS 备份设置和应用实现，部分本地应用数据可能包含在设备备份中。ReliableReader 不会有意通过 iCloud 同步 Azure Speech 密钥、文章草稿或音频缓存。你可以使用应用内清除缓存控制项从设备上移除缓存音频。</p>
 
     <p>应用内提供了清除已保存草稿、清除本地音频缓存、删除已保存 Azure 密钥的控制项。清除本地草稿或缓存音频，不会删除可能已经发送给 Azure Speech 用于生成语音的数据，也不会删除已经提交到 ReliableReader 反馈后端的反馈内容。</p>
 
@@ -166,23 +171,31 @@
       <li>如果你选择包含诊断摘要，可能包括功能区域、播放状态、安全的应用错误代码、重试次数、粗略网络状态、导入/TTS/缓存状态和错误数量等安全摘要字段。</li>
     </ul>
 
-    <p>应用内反馈系统不会上传文章正文、清理后阅读文本、Azure 密钥、Bark token、授权请求头、cookie、原始请求或响应正文、SSML、完整 URL、完整网页内容、剪贴板内容或本地文件路径。服务端校验设计上会在这些字段被意外包含时拒绝它们。</p>
+    <p>应用内反馈系统不会自动附带或上传文章正文、清理后阅读文本、Azure 密钥、Bark token、授权请求头、cookie、原始请求或响应正文、SSML、完整 URL、完整网页内容、剪贴板内容或本地文件路径。但如果你主动将这些内容粘贴或输入到反馈消息中，它们会作为反馈消息的一部分提交并保存。服务端校验设计上会在受保护的结构化字段被意外包含时拒绝它们。</p>
 
-    <p>当反馈被提交后，后端会保存反馈会话元数据、用户反馈内容、开发者回复、状态事件，以及可选的安全诊断摘要。当前后端模型中，反馈记录保留 7 天，之后应按照后端保留策略过期或删除。</p>
+    <p>当反馈被提交后，后端会保存反馈会话元数据、用户反馈内容、开发者回复、状态事件，以及可选的安全诊断摘要。当前后端模型中，反馈记录通常最多保留 7 天。标准服务器日志和备份可能有不同保留周期。</p>
 
     <p>反馈系统使用 <code>sessionId</code> 和高熵 <code>sessionToken</code>，让应用在没有账号的情况下查询开发者回复。应用会将 <code>sessionToken</code> 保存在 Keychain 中。后端只保存 session token 的哈希值。session token 不会显示在应用界面中，也不会包含在开发者通知中。</p>
 
     <p>当你刷新反馈状态时，开发者回复可能会显示在应用中。ReliableReader 不承诺实时支持，也不承诺每一条反馈都会收到回复。</p>
 
-    <p>ReliableReader 可能会使用 Bark 作为服务端开发者通知服务，用于提示有新反馈。应用本身不包含 Bark token。Bark 通知仅限低敏感度的路由和分流信息，例如 session id 前缀、分类、状态、时间戳、应用版本、构建号或仅开发者可访问的链接。Bark 通知不包含你的反馈正文、文章文本、清理后阅读文本、session token、Azure 密钥或原始诊断信息。</p>
+    <p>ReliableReader 可能会使用 Bark 或兼容服务作为服务端开发者通知通道，用于提示有新反馈。应用本身不包含 Bark token。通知内容仅限低敏感度的路由和分流信息，例如 session id 前缀、分类、状态、时间戳、应用版本、构建号，或不包含 <code>sessionToken</code> 和用户内容的访问受控开发者链接。Bark 通知不包含你的反馈正文、文章文本、清理后阅读文本、session token、Azure 密钥或原始诊断信息。</p>
 
-    <p>如果你通过 TestFlight、邮件、截图、录屏、复制诊断信息或其他手动渠道发送反馈，你主动包含的信息会通过对应反馈渠道处理。除非你选择主动分享，否则不要在反馈中粘贴 Azure 密钥、secret、请求头、请求正文、私人文章文本、清理后阅读文本或其他敏感内容。</p>
+    <p>如果你通过邮件、截图、录屏、复制诊断信息或其他手动渠道发送反馈，你主动包含的信息会通过对应反馈渠道处理。除非你选择主动分享，否则不要在反馈中粘贴 Azure 密钥、secret、请求头、请求正文、私人文章文本、清理后阅读文本或其他敏感内容。</p>
+
+    <h2>服务器日志与服务运行</h2>
+
+    <p>当你提交或刷新应用内反馈时，反馈后端及其基础设施提供商可能会处理标准服务器日志，例如 IP 地址、请求时间、请求路径、HTTP 状态码、User-Agent、错误信息和安全/rate-limit 相关记录。这些日志用于安全、防滥用、故障排查和服务运行，并可能根据基础设施提供商默认设置和实际运行需要保留；如果需要调查滥用、安全事件或满足法律要求，保留时间可能更长。</p>
+
+    <h2>TestFlight</h2>
+
+    <p>如果你通过 TestFlight 安装或测试 ReliableReader，Apple 可能会根据其 TestFlight 隐私说明处理与测试相关的信息，例如测试者姓名、邮箱、邀请信息、设备和操作系统信息、崩溃日志、使用信息以及你通过 TestFlight 提交的反馈。ReliableReader 开发者可能会通过 Apple 提供的 TestFlight 工具查看与测试、崩溃排查和反馈处理相关的信息。</p>
 
     <h2>应用能力与权限</h2>
 
     <p>ReliableReader 使用网络访问你配置的 Azure Speech 端点。应用也使用后台音频播放，使已生成音频能够按照 iOS 音频行为继续播放。</p>
 
-    <p>应用可以通过 iOS 分享面板、快捷指令、URL handoff 和剪贴板导入接收内容。剪贴板导入会在你点击应用内导入操作后发生。当前测试版中，共享 URL 会作为 URL 文本导入。</p>
+    <p>应用可以通过 iOS 分享面板、快捷指令、URL scheme 或应用跳转，以及剪贴板导入接收内容。ReliableReader 不会在后台持续监控剪贴板。剪贴板导入仅在你点击应用内导入操作后发生。当前测试版中，共享 URL 会作为 URL 文本导入。</p>
 
     <p>根据当前应用配置，ReliableReader 不请求访问麦克风、定位、通讯录或照片库。</p>
 
@@ -199,15 +212,27 @@
 
     <p>当前测试版仅在你主动提交反馈时使用开发者运营的反馈后端。该后端不用于账号登录、云同步、广告、分析、跟踪、托管 TTS 或存储 Azure 密钥。</p>
 
-    <h2>你的选择</h2>
+    <p>ReliableReader 不出售个人信息，不共享个人信息用于跨应用或跨网站的定向广告，不使用反馈内容、文章文本或诊断信息进行广告画像或数据经纪。</p>
+
+    <h2>跨境处理</h2>
+
+    <p>ReliableReader 的反馈后端和开发者通知基础设施可能位于你所在国家或地区以外。你配置的 Azure Speech 区域由你选择，文本会发送到你配置的 Azure endpoint。不同国家或地区的数据保护法律可能不同。</p>
+
+    <h2>未成年人</h2>
+
+    <p>ReliableReader 面向一般用户，不专门面向儿童。我们不会故意通过应用内反馈系统收集儿童的个人信息。如果你是未成年人，请在父母或监护人同意和指导下使用本应用，不要在反馈中提交个人敏感信息。</p>
+
+    <h2>你的选择与权利</h2>
 
     <p>测试期间，建议尽量使用非敏感文本。你可以自行控制是否配置 Azure Speech、导入哪些文本、何时生成语音音频，以及分享哪些反馈或诊断信息。</p>
 
-    <p>你可以使用应用设置中的控制项移除本地数据。本地删除控制项不会删除已经提交到反馈后端的反馈内容。你也可以通过 <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a> 联系我们，提出隐私相关问题或请求。</p>
+    <p>你可以使用应用设置中的控制项移除本地数据。本地删除控制项不会删除已经提交到反馈后端的反馈内容。</p>
+
+    <p>根据你所在地区适用的法律，你可能有权请求访问、更正、删除、限制处理或撤回同意。你可以通过 <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a> 提出隐私请求。由于 ReliableReader 当前没有账号系统，我们可能需要你提供足够信息来定位你的反馈记录，例如反馈 sessionId、提交时间或反馈分类；请不要通过邮件发送 Azure key、sessionToken 或私人文章文本。对于已经发送至你配置的 Azure Speech 服务的数据，请通过你的 Azure 账户和 Microsoft Azure 提供的工具处理。</p>
 
     <h2>政策更新</h2>
 
-    <p>随着 ReliableReader 的变化，本政策可能会更新。每次发布或扩大 TestFlight 测试前，都应复核公开版本。</p>
+    <p>随着 ReliableReader 的变化，本政策可能会更新。政策变更时，我们会更新生效日期；如果数据处理方式发生重大变化，我们会按适用法律要求提供通知。</p>
   </main>
 </body>
 </html>
