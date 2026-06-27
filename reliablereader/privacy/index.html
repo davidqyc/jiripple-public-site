@@ -84,7 +84,7 @@
     <h1>ReliableReader Privacy Policy</h1>
     <p class="effective-date">Effective Date: Pending publication</p>
 
-    <p>ReliableReader is an iOS app for importing long-form text and generating speech audio for listening. This policy describes the data handling behavior of the current beta version.</p>
+    <p>ReliableReader is an iOS app for importing long-form text and generating speech audio for listening. This policy describes the data handling behavior of the current beta version, including the optional in-app feedback system.</p>
 
     <p>For privacy questions, contact: <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a><br>
     For support questions, contact: <a href="mailto:reliablereader-support@jiripple.com">reliablereader-support@jiripple.com</a></p>
@@ -96,6 +96,8 @@
     <p>When you use speech generation, the article text you ask the app to read is sent to the Azure Speech endpoint that you configure in the app. This is required for the text-to-speech feature.</p>
 
     <p>ReliableReader does not include a shared server-side Azure key in the current beta. You provide your own Azure Speech key, region, and endpoint in the app settings.</p>
+
+    <p>If you actively submit feedback in the app, the feedback message you write is sent to the ReliableReader feedback backend and stored as support/feedback content. The developer may view that message and may reply through the feedback system. ReliableReader does not collect optional email, phone number, or name fields in this version.</p>
 
     <h2>Azure Speech Configuration</h2>
 
@@ -119,9 +121,10 @@
       <li>Generated speech audio cache, so the same content can be played again without regenerating every segment.</li>
       <li>Playback speed, audio quality, text-cleaning options, diagnostics settings, and similar app preferences.</li>
       <li>Diagnostic information when advanced diagnostics are enabled or copied by you.</li>
+      <li>Feedback session tokens in Keychain when you submit in-app feedback.</li>
     </ul>
 
-    <p>The app includes local controls for clearing saved drafts, clearing the local audio cache, and deleting the saved Azure key. Clearing local drafts or cached audio does not delete data that may already have been sent to Azure Speech for generation.</p>
+    <p>The app includes local controls for clearing saved drafts, clearing the local audio cache, and deleting the saved Azure key. Clearing local drafts or cached audio does not delete data that may already have been sent to Azure Speech for generation, and it does not delete feedback already submitted to the ReliableReader feedback backend.</p>
 
     <h2>Diagnostics and Feedback</h2>
 
@@ -131,7 +134,25 @@
 
     <p>The separate cleaned reading text view may include article content. Do not share cleaned reading text unless you choose to provide that content.</p>
 
-    <p>If you send feedback through TestFlight, email, screenshots, screen recordings, or copied diagnostics, the information you include will be handled through that feedback channel. Do not paste Azure keys, secrets, request headers, request bodies, private article text, or other sensitive content into feedback unless you choose to share it.</p>
+    <p>In-app feedback is submitted only when you choose to send it. A feedback submission may include:</p>
+
+    <ul>
+      <li>The feedback category and feedback message you write.</li>
+      <li>App version, build number, iOS version, device model, locale, and time zone.</li>
+      <li>Optional safe diagnostics summary fields if you choose to include them, such as feature area, playback state, safe app error code, retry count, coarse network state, import/TTS/cache state, and error count.</li>
+    </ul>
+
+    <p>The in-app feedback system does not upload article body text, cleaned reading text, Azure keys, Bark tokens, authorization headers, cookies, raw request or response bodies, SSML, full URLs, complete webpage contents, clipboard contents, or local file paths. Server-side validation is intended to reject these fields if they are included accidentally.</p>
+
+    <p>When feedback is submitted, the backend stores feedback session metadata, the user feedback message, developer replies, status events, and optional safe diagnostics summaries. Feedback records are retained for 7 days in the current backend model, then should expire or be deleted according to the backend retention process.</p>
+
+    <p>The feedback system uses a <code>sessionId</code> and a high-entropy <code>sessionToken</code> so the app can check for replies without an account. The app stores the <code>sessionToken</code> in Keychain. The backend stores only a hash of the session token. The session token is not shown in the app UI and is not included in developer notifications.</p>
+
+    <p>Developer replies may be visible in the app when you refresh the feedback status. ReliableReader does not promise real-time support or that every feedback report will receive a reply.</p>
+
+    <p>ReliableReader may use Bark as a server-side developer notification service for new feedback. The app does not contain a Bark token. Bark notifications are limited to low-sensitivity routing and triage fields, such as a session id prefix, category, state, timestamp, app version, build number, or a developer-only URL. Bark notifications do not include your feedback message, article text, cleaned reading text, session token, Azure key, or raw diagnostics.</p>
+
+    <p>If you send feedback through TestFlight, email, screenshots, screen recordings, copied diagnostics, or other manual channels, the information you include will be handled through that feedback channel. Do not paste Azure keys, secrets, request headers, request bodies, private article text, cleaned reading text, or other sensitive content into feedback unless you choose to share it.</p>
 
     <h2>App Capabilities and Permissions</h2>
 
@@ -147,17 +168,18 @@
 
     <ul>
       <li>An account system.</li>
-      <li>A developer-operated backend for feedback submission.</li>
       <li>Cloud sync.</li>
       <li>Advertising.</li>
       <li>Third-party analytics or tracking SDKs.</li>
     </ul>
 
+    <p>The current beta does include a developer-operated backend only for feedback that you actively submit. It is not used for account login, cloud sync, advertising, analytics, tracking, hosted TTS, or storing Azure keys.</p>
+
     <h2>Your Choices</h2>
 
     <p>For beta testing, use non-sensitive text when possible. You control whether to configure Azure Speech, what text to import, when to generate speech audio, and what feedback or diagnostics to share.</p>
 
-    <p>You can remove local data using the controls in the app settings. You can also contact <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a> for privacy-related requests or questions.</p>
+    <p>You can remove local data using the controls in the app settings. Local deletion controls do not delete feedback already submitted to the feedback backend. You can also contact <a href="mailto:reliablereader-privacy@jiripple.com">reliablereader-privacy@jiripple.com</a> for privacy-related requests or questions.</p>
 
     <h2>Changes to This Policy</h2>
 
