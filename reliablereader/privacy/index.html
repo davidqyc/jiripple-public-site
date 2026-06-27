@@ -55,6 +55,12 @@
       font-weight: 600;
     }
 
+    .language-switch {
+      margin: 8px 0 20px;
+      color: #5f6368;
+      font-size: 0.95rem;
+    }
+
     a {
       color: #0b57d0;
     }
@@ -69,7 +75,8 @@
         background: #111315;
       }
 
-      .effective-date {
+      .effective-date,
+      .language-switch {
         color: #bdc1c6;
       }
 
@@ -83,6 +90,11 @@
   <main>
     <h1>ReliableReader Privacy Policy</h1>
     <p class="effective-date">Effective Date: Pending publication</p>
+    <nav class="language-switch" aria-label="Language options">
+      <a aria-current="page" href="/reliablereader/privacy/">English</a>
+      <span> / </span>
+      <a href="/reliablereader/privacy/zh-CN/">简体中文</a>
+    </nav>
 
     <p>ReliableReader is an iOS app for importing long-form text and generating speech audio for listening. This policy describes the data handling behavior of the current beta version, including the optional in-app feedback system.</p>
 
