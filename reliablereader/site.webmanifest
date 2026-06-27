@@ -1,0 +1,15 @@
+{
+  "name": "ReliableReader",
+  "short_name": "ReliableReader",
+  "icons": [
+    {
+      "src": "/reliablereader/assets/reliablereader-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
