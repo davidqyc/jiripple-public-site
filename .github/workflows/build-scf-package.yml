@@ -1,0 +1,46 @@
+name: build-scf-package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'llms.txt'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'assets/**'
+      - 'reliablereader/**'
+      - 'xiaoheiniao/**'
+      - 'scf/**'
+      - 'scripts/build_scf_package.py'
+      - '.github/workflows/build-scf-package.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build and validate SCF ZIP
+        run: python3 scripts/build_scf_package.py
+
+      - name: Show package contents
+        run: |
+          set -euo pipefail
+          ZIP="$(find dist -maxdepth 1 -name 'jiripple-public-site-scf-*.zip' -print -quit)"
+          test -n "$ZIP"
+          unzip -l "$ZIP"
+          sha256sum "$ZIP"
+
+      - name: Upload SCF package
+        uses: actions/upload-artifact@v4
+        with:
+          name: jiripple-public-site-scf
+          path: dist/jiripple-public-site-scf-*.zip
+          if-no-files-found: error
+          retention-days: 7
