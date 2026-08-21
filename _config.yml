@@ -1,2 +1,5 @@
 exclude:
   - ops
+  - scf
+  - scripts
+  - dist
