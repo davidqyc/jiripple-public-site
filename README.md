@@ -70,6 +70,8 @@ python3 scripts/build_scf_package.py
 
 The command writes a Git-ignored package under `dist/` and prints its SHA-256. It fails closed if the SCF route allowlist and package contents drift apart.
 
+Every public HTML file entering the SCF production package must statically contain the ICP and public-security filing footer; `scripts/build_scf_package.py` validates this fail closed.
+
 The runtime intentionally serves only the public static surfaces packaged by the builder, including:
 
 ```text
