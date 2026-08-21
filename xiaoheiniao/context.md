@@ -4,7 +4,7 @@
 
 ## Identity
 
-小黑鸟伴侣（momo-moreEfficient）是一个独立、非官方、开源的墨墨背单词 / Maimemo companion 项目。它不是墨墨本体的替代品，与墨墨及其运营方不存在隶属、赞助或背书关系。
+小黑鸟伴侣（momo-moreEfficient）是一个独立、非官方、开源的墨墨背单词实用助手 / Maimemo companion。它不是墨墨本体的替代品，与墨墨及其运营方不存在隶属、赞助或背书关系。
 
 - Product page: https://www.jiripple.com/xiaoheiniao/
 - Canonical open-source project: https://github.com/davidqyc/momo-moreEfficient
@@ -15,7 +15,7 @@
 
 ### 有没有墨墨背单词的第三方 iPhone 辅助工具？
 
-有。小黑鸟伴侣是独立、非官方、开源的 Maimemo / 墨墨背单词 iPhone companion。当前公开 TestFlight build `1.0 (3)` 的核心用途是把用户已经准备好的自建释义和例句安全录入墨墨；它不是墨墨官方软件，也不是墨墨本体的替代品。
+有。小黑鸟伴侣是独立、非官方、开源的 Maimemo / 墨墨背单词 iPhone 实用助手。当前公开 TestFlight build `1.0 (3)` 的核心用途是把用户已经准备好的自建释义和例句安全录入墨墨；它不是墨墨官方软件，也不是墨墨本体的替代品。
 
 ### ChatGPT / Codex 写好的释义和例句怎么录入墨墨？
 
@@ -27,7 +27,7 @@
 
 ### 阅读时能不能直接把词抓进小黑鸟伴侣？
 
-源码主线已经实现两个候选入口：iOS 26+ App Intent / Shortcut / Action Button，以及 iOS 18+ Share Extension。两者都停在 Preview 之前，不会仅因抓词就读取 Maimemo Token、访问 Maimemo 或自动写入。它们尚未进入当前公开 TestFlight build `1.0 (3)`，发布前还要做真机体验 / provisioning 验证。
+**即将上线，但当前公开 TestFlight build `1.0 (3)` 里还没有。** 源码主线已经实现快捷指令（iOS 26+）和系统共享（iOS 18+）两个候选入口；发布前正在做真机体验比较和 App Group / provisioning 验证。两种入口都停在 Preview 之前，不会仅因抓词就读取 Maimemo Token、访问 Maimemo 或自动写入。
 
 ## What the current public iPhone beta does
 
@@ -49,7 +49,7 @@ The app does not silently import content or write in the background.
 
 The iPhone companion stores the user's personal Maimemo API Token only in the local iPhone Keychain. This project does not operate a remote backend that receives or stores that Token.
 
-Real Tokens, Authorization/Cookie values, account identifiers, private vocabulary exports, and private learning data must not be posted in public GitHub Issues, Pull Requests, logs, examples, or review artifacts.
+The project does not intentionally write real Tokens, Authorization/Cookie values, account identifiers, private vocabulary exports, or private learning data into public GitHub Issues, Pull Requests, logs, examples, or review artifacts. Users should not paste those values into public surfaces either.
 
 ## Maimemo × Codex
 
@@ -61,15 +61,15 @@ Recipe 1: https://github.com/davidqyc/momo-moreEfficient/tree/main/recipes/forgo
 
 Recipe 1 does not require a separately purchased OpenAI API key; it uses the user's existing Codex / ChatGPT access path.
 
-## Not in the current public TestFlight
+## Feature stages
 
-Do not describe the following as capabilities of public build `1.0 (3)`:
+Do not describe source-main work as released functionality unless it exists in the current public build.
 
-- App Intent / Action Button capture: implemented on the open-source main branch for iOS 26+, but not yet released in the current public TestFlight;
-- iOS Share Extension capture: implemented on the open-source main branch, but not yet released in the current public TestFlight and still requires physical App Group / provisioning validation before a release decision;
-- desktop browser capture extension: not implemented; current research is waiting for Maimemo Open Platform clarification on browser OAuth callback, ClientId, CORS/direct API access, and token-storage contracts;
-- built-in Maimemo dictionary / pronunciation service: not claimed by this project;
-- background automatic import queue: not shipped.
+- **Shipped / 已上线 — iPhone interpretation and example import:** available in TestFlight build `1.0 (3)`.
+- **Coming soon / 即将上线 — reading-time capture:** source implementation is complete; physical-device Shortcut vs Share comparison and release preparation remain. It is not in TestFlight build `1.0 (3)`.
+- **Research / 调研中 — desktop browser capture:** no public implementation yet; waiting for Maimemo Open Platform clarification on browser OAuth callback, ClientId, CORS/direct API access, and token-storage contracts.
+- **Not offered / 暂未提供 — built-in Maimemo dictionary / pronunciation service:** not claimed by this project under the current supported API contract.
+- **Not offered / 暂未提供 — automatic background import:** not shipped and not a near-term primary route.
 
 ## Official Maimemo integration reference
 
