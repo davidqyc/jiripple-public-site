@@ -6,7 +6,6 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
-import shutil
 import stat
 import subprocess
 import sys
@@ -72,6 +71,34 @@ def validate_contract() -> None:
         if not (RUNTIME / runtime_file).is_file():
             raise RuntimeError(f"Required SCF runtime file is missing: scf/{runtime_file}")
 
+    # Validate the exact production routing contract against the current source tree.
+    runtime.SITE_ROOT = ROOT
+    expected_200 = (
+        "/",
+        "/xiaoheiniao/",
+        "/xiaoheiniao/context.md",
+        "/reliablereader/",
+        "/reliablereader/privacy/",
+        "/llms.txt",
+        "/robots.txt",
+        "/sitemap.xml",
+    )
+    for request_path in expected_200:
+        if runtime.resolve_request_path(request_path) is None:
+            raise RuntimeError(f"SCF runtime would not serve required path: {request_path}")
+
+    expected_404 = (
+        "/AGENTS.md",
+        "/README.md",
+        "/ops/",
+        "/scf/server.py",
+        "/scripts/build_scf_package.py",
+        "/../README.md",
+    )
+    for request_path in expected_404:
+        if runtime.resolve_request_path(request_path) is not None:
+            raise RuntimeError(f"SCF runtime would expose non-public path: {request_path}")
+
 
 def iter_public_files():
     for name in PUBLIC_ROOT_FILES:
@@ -114,12 +141,30 @@ def build() -> Path:
             seen.add(arcname)
             write_member(zf, source, arcname)
 
+    with zipfile.ZipFile(output) as zf:
+        names = set(zf.namelist())
+        required_entries = {
+            "server.py",
+            "scf_bootstrap",
+            "index.html",
+            "xiaoheiniao/index.html",
+            "xiaoheiniao/context.md",
+            "reliablereader/index.html",
+            "reliablereader/privacy/index.html",
+            "llms.txt",
+            "robots.txt",
+            "sitemap.xml",
+        }
+        missing = sorted(required_entries - names)
+        if missing:
+            raise RuntimeError(f"SCF ZIP is missing required entries: {missing}")
+
     digest = hashlib.sha256(output.read_bytes()).hexdigest()
     manifest = {
         "zip": output.name,
         "sha256": digest,
         "bytes": output.stat().st_size,
-        "entries": len(zipfile.ZipFile(output).namelist()),
+        "entries": len(names),
     }
     print(json.dumps(manifest, ensure_ascii=False, indent=2))
     return output
