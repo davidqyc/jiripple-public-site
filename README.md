@@ -1,69 +1,54 @@
-# ReliableReader Public Site Candidate
+# JiRiPPLE Public Site
 
-This directory is a candidate GitHub Pages site root for publishing ReliableReader public pages.
+This repository is the public static-web source for JiRiPPLE / related product public pages.
 
-When publishing through an independent GitHub Pages repository, place every file inside `public-site/` at the repository root. The root should include:
+It is intentionally separate from private product repositories so public deployment artifacts can remain narrow, auditable and free of private product source, secrets and internal data.
 
-```text
-CNAME
-README.md
-reliablereader/privacy/index.html
-```
+## Scope
 
-## Candidate URL
-
-Target privacy policy URL:
+Appropriate content includes low-complexity public static surfaces such as:
 
 ```text
-https://jiripple.com/reliablereader/privacy/
+product privacy policies
+product support/contact pages
+product terms/legal notices
+company/public legal notices
+small static product landing pages
 ```
 
-Candidate file:
+Current product paths may live under product-specific directories such as:
 
 ```text
-public-site/reliablereader/privacy/index.html
+reliablereader/
 ```
 
-## Recommended Hosting Path
+Do not create a new `*-site` repository for every product when a simple static page fits this shared public surface.
 
-Use a simple static host. GitHub Pages is a practical first choice if a dedicated static-site repository will be created for `jiripple.com`.
+## Promotion boundary
 
-Suggested GitHub Pages settings:
+This repository should remain a simple static public delivery surface. If a future website grows into an independently engineered product with a CMS, authenticated backend, dynamic application state, complex deployment or a substantial independent roadmap, promote that website to its own repository rather than turning this repo into a catch-all application monolith.
 
-```text
-Source: Deploy from a branch
-Branch: main
-Folder: / (root)
-```
+## Public-source safety boundary
 
-The `CNAME` file in this directory contains:
+**This repository is public.** Pages/Jekyll exclusions affect website publication, not GitHub source visibility.
 
-```text
-jiripple.com
-```
+Therefore new commits must not contain:
 
-This directory is not deployed yet. Before publishing, the owner still needs to:
+- credentials, tokens, cookies, API keys or private certificates;
+- private account/resource identifiers;
+- identity documents or personal contact data;
+- private provider endpoints;
+- internal operational logs or raw filing/account screenshots;
+- private product source/data that is not intentionally public.
 
-1. Create or choose the static-site repository.
-2. Copy all files inside `public-site/` to that repository root.
-3. Enable GitHub Pages with the settings above, or configure another static host.
-4. Configure DNS for the website after checking the host's current official documentation.
-5. Verify that `https://jiripple.com/reliablereader/privacy/` returns the privacy policy page.
+Historical `ops/` files predate this boundary. Do not add new private operational records there by default. Any decision to remove historical files, change repository visibility or rewrite history is a separate explicit governance/privacy action.
 
-## DNS Principles
+## Hosting/DNS principles
 
-The domain currently has email-related DNS records for Tencent Enterprise Mail / WeCom-style mail service. Website setup should not disrupt mail.
+The repository contains the public-site source and domain configuration artifacts appropriate for static hosting. DNS/email infrastructure must not be modified as a side effect of ordinary content edits.
 
-When setting up hosting:
+When changing hosting or DNS, verify current provider documentation and preserve unrelated mail/security records. Hosting migration, ICP/public-security filing operations and other provider-specific execution require their own authorized runbook; this repository does not grant those permissions merely because it contains public site files.
 
-- Add only the website records required for the selected host, such as A / AAAA / CNAME records.
-- Do not change MX records.
-- Do not remove or overwrite Tencent / WeCom mail TXT records.
-- Do not remove or overwrite SPF, DKIM, or DMARC records.
-- Do not replace nameservers.
+## Governance
 
-This README does not list concrete DNS IP addresses because those should be checked against the selected host's current official documentation before configuration.
-
-## Current Limitation
-
-These files cannot be published directly from this repository without a chosen hosting path. No DNS, GitHub Pages, cloud hosting, upload, or deployment has been configured by this candidate.
+See `AGENTS.md` before substantive maintenance.
