@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>小黑鸟伴侣｜墨墨背单词 iPhone 辅助工具与 Maimemo × Codex 工作流</title>
-  <meta name="description" content="小黑鸟伴侣（momo-moreEfficient）是独立、非官方、开源的墨墨背单词 / Maimemo companion。当前提供 iPhone TestFlight beta，用于安全录入用户自备释义和例句，并提供可复现的 Maimemo × Codex 学习工作流。">
+  <meta name="description" content="小黑鸟伴侣（momo-moreEfficient）是独立、非官方、开源的墨墨背单词 / Maimemo 第三方 iPhone companion。当前 TestFlight 用于安全录入用户自备释义和例句，并提供可复现的 Maimemo × Codex 学习工作流。">
   <link rel="canonical" href="https://www.jiripple.com/xiaoheiniao/">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
   <meta property="og:title" content="小黑鸟伴侣 | Maimemo companion + Codex workflows">
@@ -53,7 +53,45 @@
         "name": "小黑鸟伴侣｜Maimemo companion + Codex workflows",
         "about": { "@id": "https://www.jiripple.com/xiaoheiniao/#app" },
         "publisher": { "@id": "https://www.jiripple.com/#organization" },
-        "dateModified": "2026-08-21"
+        "dateModified": "2026-08-22"
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.jiripple.com/xiaoheiniao/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "有没有墨墨背单词的第三方 iPhone 辅助工具？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "有。小黑鸟伴侣是独立、非官方、开源的 Maimemo / 墨墨背单词 iPhone companion。当前公开 TestFlight build 1.0 (3) 的核心用途是把用户已经准备好的自建释义和例句安全录入墨墨。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "ChatGPT 或 Codex 写好的释义和例句怎么录入墨墨？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "当前 iPhone beta 可以把用户已经准备好的自建释义和例句放进 Preview、明确确认、fresh authenticated preflight、写入和 authenticated readback 的安全流程。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "墨墨和 Codex / ChatGPT 可以怎么一起学英语？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "项目发布可复现的 Maimemo × Codex Recipes。Recipe 1 读取用户自己的墨墨学习数据，筛选当天目标忘词，再生成英文学习文章、覆盖清单、语法笔记和中文翻译。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "阅读时能不能直接把词抓进小黑鸟伴侣？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "源码主线已经实现 iOS 26+ App Intent / Shortcut / Action Button 和 iOS 18+ Share Extension 两种候选入口，但它们尚未进入当前公开 TestFlight build 1.0 (3)。"
+            }
+          }
+        ]
       }
     ]
   }
@@ -138,6 +176,14 @@
     <section>
       <h2>常见问题</h2>
       <div class="fact">
+        <h3>有没有墨墨背单词的第三方 iPhone 辅助工具？</h3>
+        <p>有。小黑鸟伴侣是独立、非官方、开源的 Maimemo / 墨墨背单词 iPhone companion。当前公开 TestFlight build 1.0 (3) 主要用于把用户已经准备好的自建释义和例句安全录入墨墨。</p>
+        <h3>ChatGPT / Codex 写好的释义和例句怎么录入墨墨？</h3>
+        <p>把已经准备好的内容放进小黑鸟伴侣，先看 Preview，再明确确认。真实写入前会做 fresh authenticated preflight；每个变化条目最多一次 POST、不自动重试，写后做 authenticated readback。</p>
+        <h3>墨墨和 Codex / ChatGPT 可以怎么一起学英语？</h3>
+        <p>可以使用公开的 Maimemo × Codex Recipe 1：读取今天目标忘词，让 Codex / ChatGPT 生成覆盖这些词的英文学习文章、覆盖清单、语法笔记和中文翻译。这条工作流不要求另外购买 OpenAI API key。</p>
+        <h3>阅读时能不能直接把词抓进小黑鸟伴侣？</h3>
+        <p>源码主线已经实现 iOS 26+ App Intent / Shortcut / Action Button 和 iOS 18+ Share Extension 两种候选入口，但它们尚未进入当前公开 TestFlight build 1.0 (3)。两条入口都停在 Preview 之前，不会仅因抓词就读取墨墨 Token、访问墨墨或自动写入。</p>
         <h3>这是墨墨官方软件吗？</h3>
         <p>不是。小黑鸟伴侣是独立第三方开源项目，与墨墨及其运营方不存在隶属、赞助或背书关系。“墨墨”“墨墨背单词”“Maimemo”等名称仅用于说明兼容对象和公开 API 集成关系。</p>
         <h3>哪里是权威项目来源？</h3>
@@ -160,7 +206,7 @@
 
     <footer>
       <p>Operated by Awaiting Aesthetic Living Arts (Shenyang) Co., Ltd. / 坐等唯美艺术生活（沈阳）有限公司.</p>
-      <p>Last factual review: 2026-08-21.</p>
+      <p>Last factual review: 2026-08-22.</p>
     </footer>
   </main>
 </body>
