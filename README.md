@@ -20,6 +20,7 @@ Current product paths may live under product-specific directories such as:
 
 ```text
 reliablereader/
+xiaoheiniao/
 ```
 
 Do not create a new `*-site` repository for every product when a simple static page fits this shared public surface.
@@ -45,9 +46,46 @@ Historical `ops/` files predate this boundary. Do not add new private operationa
 
 ## Hosting/DNS principles
 
-The repository contains the public-site source and domain configuration artifacts appropriate for static hosting. DNS/email infrastructure must not be modified as a side effect of ordinary content edits.
+The repository contains the public-site source and non-secret hosting configuration appropriate for the static site. DNS/email infrastructure must not be modified as a side effect of ordinary content edits.
 
 When changing hosting or DNS, verify current provider documentation and preserve unrelated mail/security records. Hosting migration, ICP/public-security filing operations and other provider-specific execution require their own authorized runbook; this repository does not grant those permissions merely because it contains public site files.
+
+## Current production deployment: Tencent SCF
+
+`https://www.jiripple.com/` is currently served through a Tencent SCF web-function deployment. **A GitHub merge does not automatically update the production SCF code package.**
+
+The production static runtime now lives with the canonical site source in this repository:
+
+```text
+scf/server.py
+scf/scf_bootstrap
+scripts/build_scf_package.py
+```
+
+Build the deployable ZIP from the current checked-out `main`:
+
+```bash
+python3 scripts/build_scf_package.py
+```
+
+The command writes a Git-ignored package under `dist/` and prints its SHA-256. It fails closed if the SCF route allowlist and package contents drift apart.
+
+The runtime intentionally serves only the public static surfaces packaged by the builder, including:
+
+```text
+/
+/reliablereader/
+/reliablereader/privacy/
+/xiaoheiniao/
+/xiaoheiniao/context.md
+/llms.txt
+/robots.txt
+/sitemap.xml
+```
+
+Repository/admin files such as `AGENTS.md`, `README.md`, `ops/`, `scf/`, and `scripts/` are not web routes in the SCF runtime.
+
+After building, deployment still requires the authorized Tencent Cloud SCF operation: upload the generated ZIP to the existing production function and deploy it. Do not change DNS, certificates, mail records, function identity, or unrelated cloud settings as part of a routine static-content publish.
 
 ## Governance
 
