@@ -42,7 +42,7 @@ Therefore new commits must not contain:
 - internal operational logs or raw filing/account screenshots;
 - private product source/data that is not intentionally public.
 
-Historical `ops/` files predate this boundary. Do not add new private operational records there by default. Any decision to remove historical files, change repository visibility or rewrite history is a separate explicit governance/privacy action.
+Legacy private-oriented `ops/` notes were removed from the current public tree on 2026-08-22. Their historical commits remain in Git history for audit; no history rewrite was performed because no credential/private-key exposure was identified. New operational/compliance notes that are not intentionally public must live in the correct private authority rather than this repository.
 
 ## Hosting/DNS principles
 
@@ -83,7 +83,7 @@ The runtime intentionally serves only the public static surfaces packaged by the
 /sitemap.xml
 ```
 
-Repository/admin files such as `AGENTS.md`, `README.md`, `ops/`, `scf/`, and `scripts/` are not web routes in the SCF runtime.
+Repository/admin files such as `AGENTS.md`, `README.md`, `scf/`, and `scripts/` are not web routes in the SCF runtime.
 
 After building, deployment still requires the authorized Tencent Cloud SCF operation: upload the generated ZIP to the existing production function and deploy it. Do not change DNS, certificates, mail records, function identity, or unrelated cloud settings as part of a routine static-content publish.
 
