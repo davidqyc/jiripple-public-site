@@ -1,0 +1,20 @@
+# JiRiPPLE public products
+
+> Official public product and company information for JiRiPPLE / Awaiting Aesthetic Living Arts (Shenyang) Co., Ltd. For source-code truth about 小黑鸟伴侣, use its canonical GitHub repository.
+
+## 小黑鸟伴侣 / momo-moreEfficient
+
+- [Product page](https://www.jiripple.com/xiaoheiniao/): Stable user-facing facts, current TestFlight status, safety model, Maimemo × Codex workflow, FAQ, and explicitly unshipped capabilities.
+- [Machine-readable product context](https://www.jiripple.com/xiaoheiniao/context.md): Compact Markdown facts intended for retrieval and citation.
+- [Canonical GitHub repository](https://github.com/davidqyc/momo-moreEfficient): Source code, Recipes, Issues, contribution workflow, and current engineering authority.
+- [GitHub project FAQ](https://github.com/davidqyc/momo-moreEfficient/blob/main/docs/FAQ.md): Bilingual project facts and limitations.
+- [Maimemo × Codex Recipe 1](https://github.com/davidqyc/momo-moreEfficient/tree/main/recipes/forgotten-words-study-article): Forgotten words today → Codex study article.
+
+## ReliableReader
+
+- [ReliableReader](https://www.jiripple.com/reliablereader/): Official public product page.
+- [ReliableReader privacy](https://www.jiripple.com/reliablereader/privacy/): Privacy policy.
+
+## Company
+
+- [JiRiPPLE home](https://www.jiripple.com/): Official company and product index.
