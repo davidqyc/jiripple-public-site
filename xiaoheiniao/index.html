@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>小黑鸟伴侣｜墨墨背单词 iPhone 辅助工具与 Maimemo × Codex 工作流</title>
+  <meta name="description" content="小黑鸟伴侣（momo-moreEfficient）是独立、非官方、开源的墨墨背单词 / Maimemo companion。当前提供 iPhone TestFlight beta，用于安全录入用户自备释义和例句，并提供可复现的 Maimemo × Codex 学习工作流。">
+  <link rel="canonical" href="https://www.jiripple.com/xiaoheiniao/">
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
+  <meta property="og:title" content="小黑鸟伴侣 | Maimemo companion + Codex workflows">
+  <meta property="og:description" content="独立、非官方、开源的墨墨背单词 companion：iPhone TestFlight 安全录入 + Maimemo × Codex 学习工作流。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.jiripple.com/xiaoheiniao/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.jiripple.com/#organization",
+        "name": "Awaiting Aesthetic Living Arts (Shenyang) Co., Ltd.",
+        "alternateName": "坐等唯美艺术生活（沈阳）有限公司",
+        "url": "https://www.jiripple.com/"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.jiripple.com/xiaoheiniao/#app",
+        "name": "小黑鸟伴侣",
+        "alternateName": "momo-moreEfficient",
+        "description": "Independent, unofficial, open-source iPhone companion for Maimemo / 墨墨背单词, focused on safe import of user-prepared vocabulary content and reproducible Maimemo × Codex workflows.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "iOS 18 or later",
+        "softwareVersion": "1.0 (3) external TestFlight beta",
+        "isAccessibleForFree": true,
+        "downloadUrl": "https://testflight.apple.com/join/DtVKeTSE",
+        "installUrl": "https://testflight.apple.com/join/DtVKeTSE",
+        "codeRepository": "https://github.com/davidqyc/momo-moreEfficient",
+        "softwareHelp": "https://github.com/davidqyc/momo-moreEfficient/issues",
+        "author": { "@id": "https://www.jiripple.com/#organization" },
+        "featureList": [
+          "Import user-prepared custom interpretations with Preview and explicit confirmation",
+          "Import user-prepared example sentences into Maimemo",
+          "Fresh authenticated preflight before writes",
+          "At most one POST per changed item and no automatic POST retry",
+          "Authenticated readback after dispatched writes",
+          "Reproducible Maimemo × Codex learning recipes"
+        ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.jiripple.com/xiaoheiniao/#webpage",
+        "url": "https://www.jiripple.com/xiaoheiniao/",
+        "name": "小黑鸟伴侣｜Maimemo companion + Codex workflows",
+        "about": { "@id": "https://www.jiripple.com/xiaoheiniao/#app" },
+        "publisher": { "@id": "https://www.jiripple.com/#organization" },
+        "dateModified": "2026-08-21"
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root { color-scheme: light dark; --bg:#f6f5f1; --ink:#171717; --muted:#65625b; --line:#dedbd2; --panel:#fff; --accent:#1167d8; --soft:#eef4fc; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif; line-height:1.62; }
+    main { width:min(920px,calc(100% - 40px)); margin:0 auto; padding:52px 0 64px; }
+    a { color:var(--accent); }
+    .back { display:inline-block; margin-bottom:28px; font-size:14px; text-decoration:none; }
+    header { padding-bottom:30px; border-bottom:1px solid var(--line); }
+    .eyebrow { margin:0 0 10px; color:var(--muted); font-size:14px; letter-spacing:.03em; }
+    h1 { margin:0; font-size:clamp(42px,7vw,68px); line-height:1.03; }
+    .lead { margin:18px 0 0; max-width:780px; font-size:19px; color:var(--muted); }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+    .primary,.secondary { display:inline-flex; align-items:center; min-height:44px; padding:0 16px; border-radius:8px; font-weight:700; text-decoration:none; }
+    .primary { color:#fff; background:var(--accent); }
+    .secondary { color:var(--accent); border:1px solid var(--line); background:var(--panel); }
+    section { padding:30px 0; border-bottom:1px solid var(--line); }
+    h2 { margin:0 0 14px; font-size:25px; }
+    h3 { margin:22px 0 8px; font-size:18px; }
+    p { margin:0 0 12px; }
+    ul { margin:10px 0 0; padding-left:24px; }
+    li { margin:7px 0; }
+    .fact { padding:18px 20px; border:1px solid var(--line); border-radius:9px; background:var(--panel); }
+    .status { padding:16px 18px; border-radius:9px; background:var(--soft); }
+    footer { padding-top:24px; color:var(--muted); font-size:14px; }
+    @media (prefers-color-scheme:dark) { :root { --bg:#111315; --ink:#e8eaed; --muted:#bdc1c6; --line:#34383d; --panel:#171a1f; --accent:#8ab4f8; --soft:#172231; } .primary { color:#0b1020; } }
+    @media (max-width:640px) { main { width:min(100% - 28px,920px); padding-top:36px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="/">← JiRiPPLE</a>
+    <header>
+      <p class="eyebrow">Independent · Unofficial · Open source · Maimemo compatible</p>
+      <h1>小黑鸟伴侣</h1>
+      <p class="lead"><strong>小黑鸟伴侣（momo-moreEfficient）</strong>是一个独立、非官方、开源的 <strong>墨墨背单词 / Maimemo companion</strong>。它围绕墨墨开放 API 补充少量高摩擦工作流，而不是替代墨墨本体。</p>
+      <div class="actions">
+        <a class="primary" href="https://testflight.apple.com/join/DtVKeTSE">加入 iPhone TestFlight</a>
+        <a class="secondary" href="https://github.com/davidqyc/momo-moreEfficient">GitHub 源码与项目主页</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>当前公开版本能做什么？</h2>
+      <div class="status"><strong>当前公开 TestFlight：build 1.0 (3)。</strong> 尚未正式上架 App Store。</div>
+      <ul>
+        <li>把用户自己已经准备好的<strong>自建释义</strong>安全录入墨墨。</li>
+        <li>把用户自己已经准备好的<strong>例句 / 短语</strong>录入墨墨。</li>
+        <li>真实写入前先显示 Preview；Preview 本身不是写入授权。</li>
+        <li>只有用户明确确认后才进入写入；POST 前重新做鉴权 preflight。</li>
+        <li>每个待写条目最多一次 POST，不自动重试；写后做鉴权回读核对。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>墨墨 Token 怎么处理？</h2>
+      <p>iPhone App 中，用户自己的墨墨 API Token 只保存在该 iPhone 的设备本地 Keychain。该开源项目没有远程后端接收或保存这个 Token。</p>
+      <p>GitHub Issue、PR、日志、公开示例和审阅材料都不应包含真实 Token、Authorization/Cookie、账号标识或私人学习数据。</p>
+    </section>
+
+    <section>
+      <h2>Maimemo × Codex 是什么？</h2>
+      <p>项目同时发布小型、可复现的学习工作流。当前 Recipe 1 是：<strong>读取今天忘记的单词 → 让 Codex / ChatGPT 生成一篇覆盖这些词的英文学习文章</strong>，并附覆盖清单、语法笔记和中文翻译。</p>
+      <p>Recipe 1 不要求单独购买 OpenAI API key；它使用用户已有的 Codex / ChatGPT 访问方式，并保持墨墨读取路径为语义只读工作流。</p>
+      <p><a href="https://github.com/davidqyc/momo-moreEfficient/tree/main/recipes/forgotten-words-study-article">查看 Recipe 1</a></p>
+    </section>
+
+    <section>
+      <h2>哪些能力还没有公开发布？</h2>
+      <p>为了避免搜索引擎和 AI 把 roadmap 当成现有功能，下面的状态单独列出：</p>
+      <ul>
+        <li><strong>App Intent / Action Button 抓词：</strong>源码主线已完成阶段性实现，但尚未进入当前公开 TestFlight build 1.0 (3)。</li>
+        <li><strong>iOS Share Extension 抓词：</strong>源码主线已完成阶段性实现，但尚未进入当前公开 TestFlight build 1.0 (3)，且真机分发前还需 Apple App Group / provisioning 验证。</li>
+        <li><strong>桌面浏览器抓词 Extension：</strong>尚未实现；当前等待墨墨开放平台对浏览器 OAuth 回调、CORS/API 访问等合同给出明确答复。</li>
+        <li><strong>墨墨内置词典 / 发音服务：</strong>当前项目没有声称提供。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>常见问题</h2>
+      <div class="fact">
+        <h3>这是墨墨官方软件吗？</h3>
+        <p>不是。小黑鸟伴侣是独立第三方开源项目，与墨墨及其运营方不存在隶属、赞助或背书关系。“墨墨”“墨墨背单词”“Maimemo”等名称仅用于说明兼容对象和公开 API 集成关系。</p>
+        <h3>哪里是权威项目来源？</h3>
+        <p><a href="https://github.com/davidqyc/momo-moreEfficient">GitHub 仓库</a>是源码、Recipe、Issue 和工程状态的 canonical home；本页是面向用户和搜索/答案引擎的稳定公开产品事实页。</p>
+        <h3>遇到 bug 或想提功能怎么办？</h3>
+        <p>请使用 <a href="https://github.com/davidqyc/momo-moreEfficient/issues">GitHub Issues</a>。仓库提供结构化 bug / 功能请求表单。</p>
+        <h3>墨墨官方开放 API 在哪里？</h3>
+        <p>兼容关系基于墨墨公开的开放平台与 Open API。可查看 <a href="https://memodocs.maimemo.com/docs/open/">墨墨开放平台说明</a> 与 <a href="https://open.maimemo.com/">Open API 入口</a>。</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>机器可读入口</h2>
+      <ul>
+        <li><a href="/xiaoheiniao/context.md">Product context (Markdown)</a></li>
+        <li><a href="/llms.txt">llms.txt</a></li>
+        <li><a href="/sitemap.xml">sitemap.xml</a></li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>Operated by Awaiting Aesthetic Living Arts (Shenyang) Co., Ltd. / 坐等唯美艺术生活（沈阳）有限公司.</p>
+      <p>Last factual review: 2026-08-21.</p>
+    </footer>
+  </main>
+</body>
+</html>
