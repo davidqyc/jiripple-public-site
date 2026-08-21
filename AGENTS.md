@@ -37,3 +37,15 @@ If the web surface becomes a dynamic/independent application with its own backen
 Ordinary content edits do not authorize DNS, hosting-provider, certificate, ICP/public-security filing, account, or Cloud mutations. Those require their own current authority and explicit execution boundary.
 
 Before changing `CNAME`, hosting configuration or domain-related behavior, read the current public-site state and relevant live provider authority; do not rely on old ops notes as current provider truth.
+
+## Cloud-operation transcript safety
+
+Provider consoles may expose temporary signed URLs, session tokens, account identifiers or other credentials inside browser URLs, DOM/accessibility snapshots and tool output even when the Agent never intentionally opens a credential page.
+
+For any Tencent Cloud or other provider operation:
+
+- never copy a full signed/session URL into a review report, GitHub comment, issue, artifact or other persistent/public material;
+- redact query strings and credential-like values before preserving browser/tool output; retain only the non-secret path and the minimum metadata needed to prove the operation;
+- do not treat a browser accessibility/DOM dump as automatically safe to share;
+- if a transcript accidentally captures a temporary credential, do not repeat the value in later summaries; keep that transcript private and report the exposure in sanitized form;
+- this transcript rule does not authorize creating or rotating credentials. Credential/account mutations still require their own explicit authority.
