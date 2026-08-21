@@ -27,6 +27,12 @@ PUBLIC_ROOT_DIRECTORIES = (
     "reliablereader",
     "xiaoheiniao",
 )
+ICP_NUMBER = "辽ICP备2024033740号-2"
+PUBLIC_SECURITY_NUMBER = "辽公网安备21011202001353号"
+PUBLIC_SECURITY_URL = (
+    "https://beian.mps.gov.cn/#/query/webSearch?code=21011202001353"
+)
+PUBLIC_SECURITY_ICON = "/assets/beian.png"
 FIXED_ZIP_TIME = (2026, 1, 1, 0, 0, 0)
 
 
@@ -52,7 +58,90 @@ def load_runtime_module():
     return module
 
 
-def validate_contract() -> None:
+def git_tracked_files() -> frozenset[str]:
+    output = subprocess.check_output(
+        ["git", "ls-tree", "-r", "--name-only", "-z", "HEAD"],
+        cwd=ROOT,
+    )
+    return frozenset(
+        name.decode("utf-8") for name in output.split(b"\0") if name
+    )
+
+
+def tracked_source_bytes(source: Path, tracked_files: frozenset[str]) -> bytes:
+    relative_path = source.relative_to(ROOT).as_posix()
+    if relative_path not in tracked_files:
+        raise RuntimeError(
+            f"SCF package source is not tracked by the current Git commit: {relative_path}"
+        )
+    if source.is_symlink():
+        raise RuntimeError(f"Symlink is not allowed in SCF package: {relative_path}")
+    if not source.is_file():
+        raise RuntimeError(f"Tracked SCF package source is missing: {relative_path}")
+
+    committed = subprocess.check_output(
+        ["git", "show", f"HEAD:{relative_path}"],
+        cwd=ROOT,
+    )
+    working_tree = source.read_bytes()
+    if working_tree != committed:
+        raise RuntimeError(
+            "SCF package source differs from the current Git commit: "
+            f"{relative_path}"
+        )
+    return committed
+
+
+def html_route(arcname: str) -> str:
+    if arcname == "index.html":
+        return "/"
+    if arcname.endswith("/index.html"):
+        return f"/{arcname[:-len('index.html')]}"
+    return f"/{arcname}"
+
+
+def validate_public_html(
+    public_files: tuple[tuple[Path, str], ...],
+    tracked_files: frozenset[str],
+) -> None:
+    arcnames = {arcname for _, arcname in public_files}
+    if "assets/beian.png" not in arcnames:
+        raise RuntimeError("Public-security icon is missing from the SCF package")
+
+    for source, arcname in public_files:
+        if not arcname.endswith(".html"):
+            continue
+        try:
+            html = tracked_source_bytes(source, tracked_files).decode("utf-8")
+        except UnicodeDecodeError as exc:
+            raise RuntimeError(f"Public HTML is not valid UTF-8: {arcname}") from exc
+
+        required_values = (
+            ICP_NUMBER,
+            PUBLIC_SECURITY_NUMBER,
+            PUBLIC_SECURITY_URL,
+            PUBLIC_SECURITY_ICON,
+        )
+        for value in required_values:
+            if value not in html:
+                raise RuntimeError(
+                    f"Public HTML is missing required filing content {value!r}: {arcname}"
+                )
+
+        icon_position = html.index(PUBLIC_SECURITY_ICON)
+        security_link_position = html.index(PUBLIC_SECURITY_URL)
+        security_text_position = html.index(PUBLIC_SECURITY_NUMBER)
+        if icon_position >= min(security_link_position, security_text_position):
+            raise RuntimeError(
+                "Public-security icon must precede its filing link and text in public HTML: "
+                f"{arcname}"
+            )
+
+
+def validate_contract(
+    public_files: tuple[tuple[Path, str], ...],
+    tracked_files: frozenset[str],
+) -> None:
     runtime = load_runtime_module()
     if set(runtime.PUBLIC_ROOT_FILES) != set(PUBLIC_ROOT_FILES):
         raise RuntimeError("SCF server root-file allowlist is out of sync with package builder")
@@ -71,23 +160,32 @@ def validate_contract() -> None:
         if not (RUNTIME / runtime_file).is_file():
             raise RuntimeError(f"Required SCF runtime file is missing: scf/{runtime_file}")
 
-    # Validate the exact production routing contract against the current source tree.
+    validate_public_html(public_files, tracked_files)
+
+    # Validate every published HTML route plus the explicit non-HTML surfaces.
     runtime.SITE_ROOT = ROOT
-    expected_200 = (
-        "/",
-        "/xiaoheiniao/",
+    html_routes = tuple(
+        html_route(arcname)
+        for _, arcname in public_files
+        if arcname.endswith(".html")
+    )
+    non_html_routes = (
         "/xiaoheiniao/context.md",
-        "/reliablereader/",
-        "/reliablereader/privacy/",
         "/llms.txt",
         "/robots.txt",
         "/sitemap.xml",
     )
-    for request_path in expected_200:
+    for request_path in (*html_routes, *non_html_routes):
         if runtime.resolve_request_path(request_path) is None:
             raise RuntimeError(f"SCF runtime would not serve required path: {request_path}")
 
     expected_404 = (
+        "/server.py",
+        "/scf_bootstrap",
+        "/MANIFEST.sha256",
+        "/%73erver.py",
+        "/%4dANIFEST.sha256",
+        "/%2e%2e/server.py",
         "/AGENTS.md",
         "/README.md",
         "/ops/",
@@ -100,34 +198,52 @@ def validate_contract() -> None:
             raise RuntimeError(f"SCF runtime would expose non-public path: {request_path}")
 
 
-def iter_public_files():
+def iter_public_files(tracked_files: frozenset[str]):
     for name in PUBLIC_ROOT_FILES:
-        yield ROOT / name, name
+        source = ROOT / name
+        tracked_source_bytes(source, tracked_files)
+        yield source, name
 
     for directory in PUBLIC_ROOT_DIRECTORIES:
-        source_root = ROOT / directory
-        if not source_root.exists():
-            continue
-        for path in sorted(source_root.rglob("*")):
-            if path.is_symlink():
-                raise RuntimeError(f"Symlink is not allowed in SCF public package: {path}")
-            if path.is_file():
-                yield path, path.relative_to(ROOT).as_posix()
+        prefix = f"{directory}/"
+        for relative_path in sorted(
+            name for name in tracked_files if name.startswith(prefix)
+        ):
+            parts = Path(relative_path).parts
+            if any(part == ".DS_Store" or part.startswith("._") for part in parts):
+                raise RuntimeError(
+                    f"OS metadata is not allowed in SCF public package: {relative_path}"
+                )
+            source = ROOT / relative_path
+            tracked_source_bytes(source, tracked_files)
+            yield source, relative_path
 
-    yield RUNTIME / "server.py", "server.py"
-    yield RUNTIME / "scf_bootstrap", "scf_bootstrap"
+    for source_name, arcname in (
+        ("server.py", "server.py"),
+        ("scf_bootstrap", "scf_bootstrap"),
+    ):
+        source = RUNTIME / source_name
+        tracked_source_bytes(source, tracked_files)
+        yield source, arcname
 
 
-def write_member(zf: zipfile.ZipFile, source: Path, arcname: str) -> None:
+def write_member(
+    zf: zipfile.ZipFile,
+    source: Path,
+    arcname: str,
+    tracked_files: frozenset[str],
+) -> None:
     mode = 0o755 if arcname == "scf_bootstrap" else 0o644
     info = zipfile.ZipInfo(arcname, date_time=FIXED_ZIP_TIME)
     info.compress_type = zipfile.ZIP_DEFLATED
     info.external_attr = (stat.S_IFREG | mode) << 16
-    zf.writestr(info, source.read_bytes())
+    zf.writestr(info, tracked_source_bytes(source, tracked_files))
 
 
 def build() -> Path:
-    validate_contract()
+    tracked_files = git_tracked_files()
+    public_files = tuple(iter_public_files(tracked_files))
+    validate_contract(public_files, tracked_files)
     DIST.mkdir(exist_ok=True)
     for stale in DIST.glob("jiripple-public-site-scf-*.zip"):
         stale.unlink()
@@ -135,11 +251,11 @@ def build() -> Path:
     output = DIST / f"jiripple-public-site-scf-{git_short_sha()}.zip"
     with zipfile.ZipFile(output, "w") as zf:
         seen: set[str] = set()
-        for source, arcname in iter_public_files():
+        for source, arcname in public_files:
             if arcname in seen:
                 raise RuntimeError(f"Duplicate archive path: {arcname}")
             seen.add(arcname)
-            write_member(zf, source, arcname)
+            write_member(zf, source, arcname, tracked_files)
 
     with zipfile.ZipFile(output) as zf:
         names = set(zf.namelist())
