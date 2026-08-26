@@ -53,7 +53,7 @@
         "name": "小黑鸟伴侣｜Maimemo companion + Codex workflows",
         "about": { "@id": "https://www.jiripple.com/xiaoheiniao/#app" },
         "publisher": { "@id": "https://www.jiripple.com/#organization" },
-        "dateModified": "2026-08-22"
+        "dateModified": "2026-08-26"
       },
       {
         "@type": "FAQPage",
@@ -88,7 +88,7 @@
             "name": "阅读时能不能直接把词抓进小黑鸟伴侣？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "源码主线已经实现 iOS 26+ App Intent / Shortcut / Action Button 和 iOS 18+ Share Extension 两种候选入口，但它们尚未进入当前公开 TestFlight build 1.0 (3)。"
+              "text": "阅读抓词源码和实体 iPhone 验证已经完成，但尚未进入当前公开 TestFlight build 1.0 (3)。系统共享是推荐的正常入口，iOS 26+ 快捷指令是更快的预配置备选；两条入口都停在 Preview 之前。"
             }
           }
         ]
@@ -166,8 +166,8 @@
       <h2>哪些能力还没有公开发布？</h2>
       <p>为了避免搜索引擎和 AI 把 roadmap 当成现有功能，下面的状态单独列出：</p>
       <ul>
-        <li><strong>App Intent / Action Button 抓词：</strong>源码主线已完成阶段性实现，但尚未进入当前公开 TestFlight build 1.0 (3)。</li>
-        <li><strong>iOS Share Extension 抓词：</strong>源码主线已完成阶段性实现，但尚未进入当前公开 TestFlight build 1.0 (3)，且真机分发前还需 Apple App Group / provisioning 验证。</li>
+        <li><strong>系统共享抓词：</strong>源码主线和实体 iPhone 验证均已完成，是推荐的正常阅读抓词入口；仍未进入当前公开 TestFlight build 1.0 (3)。适用于能够把选中文字交给系统共享面板的来源 App。</li>
+        <li><strong>快捷指令抓词（iOS 26+）：</strong>源码主线和实体 iPhone 验证均已完成，保留为更快的预配置备选；配置后运行快捷指令会自动前台打开小黑鸟伴侣。仍未进入当前公开 TestFlight build 1.0 (3)。</li>
         <li><strong>桌面浏览器抓词 Extension：</strong>尚未实现；当前等待墨墨开放平台对浏览器 OAuth 回调、CORS/API 访问等合同给出明确答复。</li>
         <li><strong>墨墨内置词典 / 发音服务：</strong>当前项目没有声称提供。</li>
       </ul>
@@ -183,7 +183,7 @@
         <h3>墨墨和 Codex / ChatGPT 可以怎么一起学英语？</h3>
         <p>可以使用公开的 Maimemo × Codex Recipe 1：读取今天目标忘词，让 Codex / ChatGPT 生成覆盖这些词的英文学习文章、覆盖清单、语法笔记和中文翻译。这条工作流不要求另外购买 OpenAI API key。</p>
         <h3>阅读时能不能直接把词抓进小黑鸟伴侣？</h3>
-        <p>源码主线已经实现 iOS 26+ App Intent / Shortcut / Action Button 和 iOS 18+ Share Extension 两种候选入口，但它们尚未进入当前公开 TestFlight build 1.0 (3)。两条入口都停在 Preview 之前，不会仅因抓词就读取墨墨 Token、访问墨墨或自动写入。</p>
+        <p><strong>即将上线，但当前公开 TestFlight build 1.0 (3) 里还没有。</strong> 阅读抓词源码和实体 iPhone 验证已经完成。系统共享是推荐的正常入口，iOS 26+ 快捷指令是更快的预配置备选；两条入口都停在 Preview 之前，不会仅因抓词就授权或执行墨墨写入。</p>
         <h3>这是墨墨官方软件吗？</h3>
         <p>不是。小黑鸟伴侣是独立第三方开源项目，与墨墨及其运营方不存在隶属、赞助或背书关系。“墨墨”“墨墨背单词”“Maimemo”等名称仅用于说明兼容对象和公开 API 集成关系。</p>
         <h3>哪里是权威项目来源？</h3>
@@ -206,7 +206,7 @@
 
     <footer>
       <p>Operated by Awaiting Aesthetic Living Arts (Shenyang) Co., Ltd. / 坐等唯美艺术生活（沈阳）有限公司.</p>
-      <p>Last factual review: 2026-08-22.</p>
+      <p>Last factual review: 2026-08-26.</p>
       <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">辽ICP备2024033740号-2</a></p>
       <p><img src="/assets/beian.png" width="18" height="20" alt="" style="vertical-align:middle;margin-right:6px"><a href="https://beian.mps.gov.cn/#/query/webSearch?code=21011202001353" rel="noreferrer" target="_blank">辽公网安备21011202001353号</a></p>
     </footer>
