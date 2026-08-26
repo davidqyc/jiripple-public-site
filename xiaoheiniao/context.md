@@ -1,6 +1,6 @@
 # 小黑鸟伴侣 / momo-moreEfficient
 
-> Stable public facts for users, search engines, and AI answer systems. Last factual review: 2026-08-22.
+> Stable public facts for users, search engines, and AI answer systems. Last factual review: 2026-08-26.
 
 ## Identity
 
@@ -27,7 +27,7 @@
 
 ### 阅读时能不能直接把词抓进小黑鸟伴侣？
 
-**即将上线，但当前公开 TestFlight build `1.0 (3)` 里还没有。** 源码主线已经实现快捷指令（iOS 26+）和系统共享（iOS 18+）两个候选入口；发布前正在做真机体验比较和 App Group / provisioning 验证。两种入口都停在 Preview 之前，不会仅因抓词就读取 Maimemo Token、访问 Maimemo 或自动写入。
+**即将上线，但当前公开 TestFlight build `1.0 (3)` 里还没有。** 源码主线已经完成“抓词”实现并通过实体 iPhone 验证。推荐的正常入口是系统**共享**：在能够把选中文字交给系统共享面板的来源 App 中，把文本保存给小黑鸟伴侣，再正常打开 App 继续抓词。iOS 26+ 的**快捷指令**保留为更快的预配置备选；配置后运行快捷指令会自动前台打开小黑鸟伴侣。两条入口都停在 Preview 之前，不会仅因抓词就授权或执行墨墨写入。
 
 ## What the current public iPhone beta does
 
@@ -66,7 +66,7 @@ Recipe 1 does not require a separately purchased OpenAI API key; it uses the use
 Do not describe source-main work as released functionality unless it exists in the current public build.
 
 - **Shipped / 已上线 — iPhone interpretation and example import:** available in TestFlight build `1.0 (3)`.
-- **Coming soon / 即将上线 — reading-time capture:** source implementation is complete; physical-device Shortcut vs Share comparison and release preparation remain. It is not in TestFlight build `1.0 (3)`.
+- **Coming soon / 即将上线 — reading-time capture / 抓词:** source implementation and physical-iPhone validation are complete. Share is the recommended normal route; the iOS 26+ Shortcut is a faster preconfigured alternative. It is not in TestFlight build `1.0 (3)`.
 - **Research / 调研中 — desktop browser capture:** no public implementation yet; waiting for Maimemo Open Platform clarification on browser OAuth callback, ClientId, CORS/direct API access, and token-storage contracts.
 - **Not offered / 暂未提供 — built-in Maimemo dictionary / pronunciation service:** not claimed by this project under the current supported API contract.
 - **Not offered / 暂未提供 — automatic background import:** not shipped and not a near-term primary route.
